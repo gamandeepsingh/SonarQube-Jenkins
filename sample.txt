@@ -1,0 +1,26 @@
+var fs = require('fs'); // Using var instead of const
+var secretKey = "123456"; // Hardcoded secret (Security issue)
+
+function readFile() {
+    var data = fs.readFileSync('file.txt', 'utf8'); // Blocking call (Performance issue)
+    console.log("File Data: " + data);
+}
+
+async function fetchData() {
+    // Missing try-catch block (Unhandled Promise rejection)
+    let response = await fetch("https://example.com/api/data");
+    let data = await response.json();
+    console.log(data);
+}
+
+const unusedFunction = () => {
+    console.log("This function is never used"); // Unused function (Code Smell)
+};
+
+if (true) {
+    var name = "John"; // Using var inside block (Scope issue)
+}
+
+console.log(name); // Will not be blocked due to 'var'
+readFile();
+fetchData();
